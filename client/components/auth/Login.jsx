@@ -22,6 +22,7 @@ import {
 } from "@material-ui/core";
 import useStyles from "../../style/theme";
 import inputCheck from "../../utils/inputCheck";
+import SearchCoupleBtn from "../findRegistry/searchCoupleBtn";
 
 const Login = ({ registerUser, loginUser, ...rest }) => {
   const [emailInput, updateEmail, resetEmail] = useInput("");
@@ -29,6 +30,7 @@ const Login = ({ registerUser, loginUser, ...rest }) => {
   const [open, setOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
+  const [checkCookies, setCheckCookies] = useState(false);
   const classes = useStyles();
 
   const handleClickOpen = () => setOpen(true);
@@ -37,6 +39,11 @@ const Login = ({ registerUser, loginUser, ...rest }) => {
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleClickShowPasswordLogin = () =>
     setShowPasswordLogin(!showPassword);
+
+  //I need to pass down checkcookies to productcard somehow
+  if (document.cookie.match(/ssid/)) {
+    () => setCheckCookies(true);
+  }
 
   return (
     <div
@@ -62,11 +69,15 @@ const Login = ({ registerUser, loginUser, ...rest }) => {
         >
           Build your own
         </Button>
-        <Link underline ='none' to="/searchcouple">
-          <Button className={classes.findRegistryBtn} variant="contained">
-            Find Registry
-          </Button>
-        </Link>
+        <div>
+          <Link to="/searchcouple">
+            <SearchCoupleBtn
+              checkCookies={checkCookies}
+              className={classes.findRegistryBtn}
+              variant="contained"
+            />
+          </Link>
+        </div>
       </Box>
       <Dialog open={open} onClose={handleClose}>
         <Register registerUser={registerUser} setOpen={setOpen} />

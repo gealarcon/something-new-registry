@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import NavBar from '../nav/NavBar';
-import { Button, TextField, Dialog } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
-import useInput from '../hooks/useInput';
-import useStyles from '../../style/theme';
-import Search from '../search/Search';
-import useToggler from '../hooks/useToggler';
-import { Grid, Fab } from '@material-ui/core';
-import ScrollTop from '../product/ScrollTop';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import ProductList from '../product/ProductList';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import NavBar from "../nav/NavBar";
+import { Button, TextField, Dialog } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
+import useInput from "../hooks/useInput";
+import useStyles from "../../style/theme";
+import Search from "../search/Search";
+import useToggler from "../hooks/useToggler";
+import { Grid, Fab } from "@material-ui/core";
+import ScrollTop from "../product/ScrollTop";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+// import ProductList from "../product/ProductList";
 
-const SearchCouple = (coupleUserName) => {
-  const [searchCoupleRegistry, handleSearchVal, resetSearch] = useInput('');
-  const [guessList, setGuessList] = useState([]);
+const SearchCouple = () => {
+  const [searchCoupleRegistry, handleSearchVal, resetSearch] = useInput("");
+  // const [guessList, setGuessList] = useState([]);
   const classes = useStyles();
   const [lookingCouple, toggler] = useToggler(false);
 
@@ -22,57 +22,57 @@ const SearchCouple = (coupleUserName) => {
     e.preventDefault();
 
     if (!searchCoupleRegistry)
-      return alert('Please fill in the search bar input!');
+      return alert("Please fill in the search bar input!");
 
     toggler();
 
     console.log(searchCoupleRegistry);
     fetch(`/api/auth/searchcouple/${searchCoupleRegistry}`, {
-      method: 'GET',
+      method: "GET",
       header: {
-        'content-type': 'Application/JSON',
+        "content-type": "Application/JSON",
       },
     })
       .then((resp) => resp.json())
       .then(({ products }) => setGuessList(products))
       .catch((err) => {
-        console.log('err', err);
+        console.log("err", err);
         alert(
-          'Uh oh! looks like we did not find this couple, please try again.'
+          "Uh oh! looks like we did not find this couple, please try again."
         );
       });
   };
-  //buy product from the Register list
-  // const buyProduct = (e) => {
-  //   e.preventDefault();
+  // buy product from the Register list
+  const buyProduct = (e) => {
+    e.preventDefault();
 
-  //   fetch(`/api/products/${userId}`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       google_url,
-  //       userId,
-  //       product_name,
-  //       image_url,
-  //       store_name,
-  //       lowest_daily_price,
-  //       product_id,
-  //       date,
-  //     }),
-  //   })
-  //     .then((resp) => resp.json())
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log("main ue addProduct", err);
-  //       alert(
-  //         "Uh oh! someone already bough this item, or maybe it will be release later. Try again later"
-  //       );
-  //     });
-  // };
+    fetch(`/api/products/${userId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        google_url,
+        userId,
+        product_name,
+        image_url,
+        store_name,
+        lowest_daily_price,
+        product_id,
+        date,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log("main ue addProduct", err);
+        alert(
+          "Uh oh! someone already bough this item, or maybe it will be release later. Try again later"
+        );
+      });
+  };
 
   return (
     <>
@@ -105,7 +105,7 @@ const SearchCouple = (coupleUserName) => {
           item
           justify="center"
           xs={12}
-          style={{ margin: '2rem 0' }}
+          style={{ margin: "2rem 0" }}
         ></Grid>
         <Grid
           container
@@ -118,7 +118,7 @@ const SearchCouple = (coupleUserName) => {
           xl={9}
         >
           {/* buyProduct is for the guess to add to a temp cart locations: ProfuctList*/}
-          {/*<ProductList list={list} buyProduct={buyProduct} />*/}
+          {/*<ProductList buyProduct={buyProduct} />*/}
         </Grid>
       </Grid>
       <ScrollTop>
