@@ -75,7 +75,7 @@ const ProductCard = ({
               color: '#0a1511',
             }}
           >
-            <Typography variant="h6">{productName} </Typography>
+            <Typography style = {{fontSize: '16px'}}>{productName} </Typography>
           </div>
 
           <div

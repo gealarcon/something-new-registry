@@ -93,7 +93,7 @@ const SearchCouple = ({ list, setList }) => {
           Back
         </Link>
       </Button>
-      <div style={{ position: 'fixed', top: '10px', left: '30%' }}>
+      <div style={{ position: 'relative', top: '10px', left: '30%' }}>
         <form onSubmit={coupleSearch}>
           <TextField
             className={classes.searchBar}
